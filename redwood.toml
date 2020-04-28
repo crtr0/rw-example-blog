@@ -1,6 +1,7 @@
 [web]
   port = 8910
-  apiProxyPath = "/.netlify/functions"
+  #apiProxyPath = "/.netlify/functions"
+  apiProxyPath = "https://ancient-island-61569.herokuapp.com"
 [api]
   port = 8911
 [browser]

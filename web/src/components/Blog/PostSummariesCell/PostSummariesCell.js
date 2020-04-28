@@ -3,26 +3,23 @@ import Pagination from 'src/components/Blog/Pagination'
 
 export const beforeQuery = ({ page, perPage }) => {
   page = page ? parseInt(page) : 1
-  return { variables: { page: page, limit: perPage } }
+  return { variables: { first: (page - 1) * perPage, last: page * perPage } }
 }
 
 export const QUERY = gql`
-  query ALL_POSTS_PAGED($page: Int, $limit: Int) {
-    allPosts(page: $page, limit: $limit) {
-      posts {
+  query ALL_POSTS_PAGED($first: Int, $last: Int) {
+    posts(first: $first, last: $last) {
+      id
+      title
+      slug
+      author
+      body
+      image
+      postedAt
+      tags {
         id
-        title
-        slug
-        author
-        body
-        image
-        postedAt
-        tags {
-          id
-          name
-        }
+        name
       }
-      count
     }
   }
 `
@@ -37,13 +34,13 @@ const sortedPosts = (posts) => {
   })
 }
 
-export const Success = ({ allPosts, page, perPage }) => {
+export const Success = ({ posts, page, perPage }) => {
   return (
     <>
-      {sortedPosts(allPosts.posts).map((post) => (
+      {sortedPosts(posts).map((post) => (
         <Post key={post.id} post={post} summary={true} />
       ))}
-      <Pagination count={allPosts.count} page={page} perPage={perPage} />
+      <Pagination count={posts.count} page={page} perPage={perPage} />
     </>
   )
 }
