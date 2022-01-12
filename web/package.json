@@ -8,7 +8,7 @@
     "@redwoodjs/web": "^0.4.0",
     "filestack-react": "^3.1.0",
     "html-truncate": "^1.2.2",
-    "markdown-it": "^10.0.0",
+    "markdown-it": "^12.3.2",
     "moment": "^2.24.0",
     "netlify-identity-widget": "^1.5.6",
     "prop-types": "^15.7.2",
